@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  product-db:
+    image: postgres
+    container_name: product-db
+    environment:
+      POSTGRES_DB: product-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tulshi paul
+    volumes:
+      - C:/Users/ASUS/AppData/Roaming/docker-data/product-db:/var/lib/postgresql/data
+    networks:
+      - myNetwork
+
+  product-service:
+    image: rupaldraft/product-service
+    container_name: product-service
+    ports:
+      - "8080:8080"
+    networks:
+      - myNetwork
+    depends_on:
+      - product-db
+
+volumes:
+  product-db-data:
+
+networks:
+  myNetwork:
